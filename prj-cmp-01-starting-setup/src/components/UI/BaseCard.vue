@@ -1,5 +1,7 @@
 <template>
-  <div><slot>っっh</slot></div>
+  <div>
+    <slot></slot>
+  </div>
 </template>
 
 <style scoped>
