@@ -1,15 +1,27 @@
 <template>
 <header>
-    <h1></h1>
+    <h1>{{ title }}</h1>
 </header>
 </template>
 
+<script>
+export default{
+props:['title']
+}
+</script>
+
 <style scoped>
-div {
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-  padding: 1rem;
-  margin: 2rem auto;
-  max-width: 40rem;
+header {
+  width: 100%;
+  height: 5rem;
+  background-color: #640032;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+header h1 {
+  color: white;
+  margin: 0;
 }
 </style>

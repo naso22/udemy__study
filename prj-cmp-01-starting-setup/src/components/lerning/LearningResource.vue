@@ -1,6 +1,6 @@
 <template>
     <li>
-        <base-card>
+        <base-vard>
         <header>
             <h3>{{title}}</h3>
             <button>delete</button>
@@ -9,7 +9,7 @@
             <nav>
                 <a :href='link'>Vie resource</a>
             </nav>
-        </base-card>
+        </base-vard>
 
             </li>
 </template>
