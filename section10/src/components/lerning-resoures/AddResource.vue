@@ -1,31 +1,39 @@
 <template>
 
   <base-card>
-    <div class='form-control'>
-    <form>
+
+    <form @submit.prevent='submitData'>
+      <div class='form-control'>
       <label for='title'>Title</label>
-      <input id='title' name='title' type='text'>
-    </form>
+      <input id='title' name='title' type='text' ref='titleInput'>
     </div>
     <div class='form-control'>
-      <form>
         <label for='title'>Title</label>
-        <textarea id='description' name='description' rows='3'></textarea>
-      </form>
+        <textarea id='description' name='description' rows='3' ref='descriptionInput'></textarea>
     </div>
     <div class='form-control'>
-      <form>
-        <label for='link'>Title</label>
-        <textarea id='link' name='link' rows='3'></textarea>
-      </form>
+        <label for='link'>Link</label>
+        <textarea id='link' name='link' rows='3' ref='linkInput'></textarea>
     </div>
     <div>
       <base-button type='submit'>Add Resource</base-button>
     </div>
+ </form>
   </base-card>
 </template>
-<script setup>
-import BaseButton from '@/components/UI/BaseButton.vue';
+<script>
+export default {
+  inject :['addResource'],
+  methods :{
+    submitData(){
+      const enteredTitle = this.$refs.titleInput.value;
+      const enteredDescription = this.$refs.descriptionInput.value;
+      const enteredUrl =this.$refs.linkInput.value;
+
+      this.addResource(enteredTitle,enteredDescription,enteredUrl);
+    },
+  },
+}
 </script>
 
 <style scoped>
