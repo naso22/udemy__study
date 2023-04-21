@@ -1,6 +1,5 @@
 <template>
   <ul>
-
       <learning-resource v-for='res in resources'
                          :key='res.id'
                          :title='res.title'
