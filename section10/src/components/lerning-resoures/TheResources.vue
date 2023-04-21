@@ -5,7 +5,7 @@
     <base-button @click="setSelectedTab('add-resource')"
     :mode='AddResButtonMode'>AddResource</base-button>
   </base-card>
-  
+
   <keep-alive>
   <component :is='selectedTab'></component>
   </keep-alive>
