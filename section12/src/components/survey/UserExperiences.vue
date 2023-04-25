@@ -3,10 +3,11 @@
     <base-card>
       <h2>Submitted Experiences</h2>
       <div>
-        <base-button >Load Submitted Experiences</base-button>
+        <base-button @click='loadExperiences'>Load Submitted Experiences</base-button>
       </div>
       <p v-if='isLoading'>Loading....</p>
-      <ul v-if='! isLoading'>
+      <p v-else-if='!isLoading && (!results || results.length ===0)'>no store experience</p>
+      <ul v-else-if="!isLoading && results && results.length>0">
         <survey-result
           v-for="result in results"
           :key="result.id"
