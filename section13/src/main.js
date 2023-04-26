@@ -37,6 +37,12 @@ const router = createRouter({
     return {left: 0, top:0};
   }
 });
+
+router.beforeEach(function(to,from,next){
+  console.log('global beforeeach');
+  console.log(to,from);
+  next();
+})
 const app = createApp(App);
 
 app.use(router);
