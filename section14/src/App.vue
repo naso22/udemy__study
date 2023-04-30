@@ -9,7 +9,7 @@
     </transition>
     <button @click='toggleParagraph'>toggle paragraph</button>
   </div>
-  <base-modal @close="hideDialog" v-if="dialogIsVisible">
+  <base-modal @close="hideDialog" :open="dialogIsVisible">
     <p>This is a test dialog!</p>
     <button @click="hideDialog">Close it!</button>
   </base-modal>
@@ -88,9 +88,6 @@ button:active {
   border-radius: 12px;
 }
 
-.animate{
-      animation:slide-fade  0.3s forwards;
-}
 
 .para-enter-from{
     //opacity: 0;
