@@ -5,7 +5,7 @@
   </div>
   <div class="container">
     <transition
-      name="para"
+      :css='false'
       @before-enter="beforeEnter"
       @enter="enter"
       @after-enter='afterEnter'
@@ -68,6 +68,12 @@ export default {
         }
       },20)
     },
+
+    beforeEnter(el){
+      el.style.opacity=0
+    },
+
+
 
     leave(el,done){
       console.log('leave');
