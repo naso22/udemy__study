@@ -37,6 +37,7 @@
 </template>
 <script>
 export default {
+  emits:['save-data'],
   data() {
     return {
       firstName: '',
@@ -52,8 +53,10 @@ export default {
         first:this.firstName,
         last: this.lastName,
         desc:this.rate,
+        rate:this.rate,
+        areas:this.areas
       };
-      console.log(formData)
+      this.$emit('save-data',formData)
     }
   }
 
