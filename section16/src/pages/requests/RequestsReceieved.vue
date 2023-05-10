@@ -30,9 +30,6 @@ export default {
       return this.$store.getters['requests/hasRequests']
     }
   },
-  mounted() {
-    console.log(this.hasRequests)
-  }
 }
 </script>
 
