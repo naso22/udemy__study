@@ -27,7 +27,7 @@ export  default {
   },
   methods:{
     submitForm(){
-      this.formIsValid =true;
+      this.formIsValid=true;
       if (this.email ===''||
         !this.email.includes('@') ||
         this.message === ''
@@ -38,7 +38,7 @@ export  default {
       this.$store.dispatch('requests/contactCoach',{
         email:this.email,
         message:this.message,
-        coachId:this.$route.id
+        coachId:this.$route.params.id
       });
       this.$router.replace('/coaches');
     }

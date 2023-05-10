@@ -4,7 +4,7 @@
       <header>
         <h2>Requests Received</h2>
       </header>
-      <ul v-if='!hasRequests'>
+      <ul v-if='hasRequests'>
         <requests-item v-for='req in receivedRequests'
                        :key='req.id'
                        :email='req.userEmail'
@@ -27,8 +27,11 @@ export default {
       return this.$store.getters['requests/requests']
     },
     hasRequests(){
-      return this.$store.getters['requests/hesRequests']
+      return this.$store.getters['requests/hasRequests']
     }
+  },
+  mounted() {
+    console.log(this.hasRequests)
   }
 }
 </script>
