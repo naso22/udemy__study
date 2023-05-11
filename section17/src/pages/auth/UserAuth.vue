@@ -68,10 +68,15 @@ export default {
 
       this.isLoading =true;
 
+      const actionPayload ={
+        email: this.email,
+        password: this.password
+      }
+
       try {
-        if (this.mode ==='login'){
-          ///
-        }else{
+        if (this.mode ==='login') {
+          await this.$store.dispatch('login', actionPayload)
+        } else{
           await this.$store.dispatch('signup',{
             email:this.email,
             password:this.password,
