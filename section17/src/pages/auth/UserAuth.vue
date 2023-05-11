@@ -1,26 +1,26 @@
 <template>
   <div>
     <base-dialog :show='!!error' title='An error occurred' @close='handleError'>
-      <p>{{error}}</p>
+      <p>{{ error }}</p>
     </base-dialog>
-  <base-dialog :show='isLoading' title='Authentivating...' fixed>
-    <base-spinner></base-spinner>
-  </base-dialog>
+    <base-dialog :show='isLoading' title='Authentivating...' fixed>
+      <base-spinner></base-spinner>
+    </base-dialog>
     <base-card>
       <form @submit.prevent='submitForm'>
-  <div class='form-control'>
-    <label for='email'>E-Mail</label>
-    <input type='email' id='email' v-model='email'>
-  </div>
-  <div class='form-control'>
-    <label for='password'>Password</label>
-    <input type='password' id='password' v-model='password'>
-  </div>
+        <div class='form-control'>
+          <label for='email'>E-Mail</label>
+          <input type='email' id='email' v-model='email'>
+        </div>
+        <div class='form-control'>
+          <label for='password'>Password</label>
+          <input type='password' id='password' v-model='password'>
+        </div>
         <p v-if='!formIsValid'>please enter avalid email and password (must be at least 6 characters long).</p>
-  <base-button>{{submitButtonCaption}}</base-button>
-  <base-button type='button' mode='flat' @click='switchAuthMode'>{{switchModeButtonCaption}}</base-button>
-  </form>
-  </base-card>
+        <base-button>{{ submitButtonCaption }}</base-button>
+        <base-button type='button' mode='flat' @click='switchAuthMode'>{{ switchModeButtonCaption }}</base-button>
+      </form>
+    </base-card>
   </div>
 </template>
 <script>
@@ -29,80 +29,78 @@ import BaseSpinner from '@/components/ui/BaseSpinner.vue';
 
 export default {
   components: { BaseSpinner, BaseDialog },
-  data(){
-    return{
-      email:'',
-      password:'',
-      formIsValid:true,
-      mode:'login',
-      isLoading:false,
-      error:null
+  data() {
+    return {
+      email: '',
+      password: '',
+      formIsValid: true,
+      mode: 'login',
+      isLoading: false,
+      error: null
     };
   },
-  computed:{
+  computed: {
     submitButtonCaption() {
       if (this.mode === 'login') {
-        return 'Login'
-      }else{
+        return 'Login';
+      } else {
         return 'Signup';
       }
     },
-    switchModeButtonCaption(){
-      if (this.mode ==='login'){
+    switchModeButtonCaption() {
+      if (this.mode === 'login') {
         return 'Signup instead';
-      }else {
+      } else {
         return 'Login instead';
       }
     }
   },
-  methods:{
-    async submitForm(){
-      this.formIsValid =true;
-      if(this.email === '' ||
+  methods: {
+    async submitForm() {
+      this.formIsValid = true;
+      if (this.email === '' ||
         !this.email.includes('@') ||
-        this.password.length <6)
-      {
+        this.password.length < 6) {
         this.formIsValid = false;
         return;
       }
 
-      this.isLoading =true;
+      this.isLoading = true;
 
-      const actionPayload ={
+      const actionPayload = {
         email: this.email,
         password: this.password
-      }
+      };
 
       try {
-        if (this.mode ==='login') {
-          await this.$store.dispatch('login', actionPayload)
-        } else{
-          await this.$store.dispatch('signup',{
-            email:this.email,
-            password:this.password,
-          })
+        if (this.mode === 'login') {
+          await this.$store.dispatch('login', actionPayload);
+        } else {
+          await this.$store.dispatch('signup', actionPayload);
         }
+        const redirectUrl = '/' + (this.$route.query.redirect || 'coaches');
+        this.$router.replace(redirectUrl);
 
-      }catch (err){
-        this.error =err.message || 'failed to authenticate, try later.'
+      } catch (err) {
+        this.error = err.message || 'failed to authenticate, try later.';
       }
 
-      this.isLoading =false
+      this.isLoading = false;
 
     },
-    switchAuthMode(){
-      if (this.mode === 'login'){
-        this.mode ='signup';
-      }else{
-        this.mode = 'login'
+    switchAuthMode() {
+      if (this.mode === 'login') {
+        this.mode = 'signup';
+      } else {
+        this.mode = 'login';
       }
     },
 
-    handleError(){
-      this.error =null;
+    handleError() {
+      this.error = null;
     }
   }
-}
+};
 </script>
 
 <style scoped>
