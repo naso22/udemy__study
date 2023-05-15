@@ -1,26 +1,34 @@
 <template>
   <section class="container">
-    <h2>{{user.name}}</h2>
-    <h3>{{ user.age }}</h3>
+   <user-data  :first-name='firstName' :last-name='lastName'></user-data>
+    <button @clivk='setAge'>Change Age</button>
+    <div>
+      <input type='text' placeholder='First Name' v-model='firstName'>
+      <input type='text' placeholder='Last Name' ref='lastNameInput'>
+      <button @click='setLastName'>Set Last Name</button>
 
+    </div>
   </section>
 </template>
 
 <script>
-import {reactive} from'vue'
+import {ref} from'vue'
+import UserData from './components/UserData.vue'
 export default {
+  components:{
+    UserData
+  },
   setup(){
-    const user =reactive({
-      name:'Maximilian',
-      age:31
-    });
-    setTimeout(function(){
-      user.name ='Max';
-      user.age =32;
-    },2000)
+    const firstName =ref('')
+    const lastName = ref('')
+    const lastNameInput= ref(null)
 
-    return{ user:user }
+    function setLastName(){
+      lastName.value = lastNameInput.value
+    }
 
+
+    return{ firstName , lastName,lastNameInput,setLastName,}
   }
   // data() {
   //   return {
